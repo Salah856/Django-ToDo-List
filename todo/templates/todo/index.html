@@ -53,9 +53,19 @@
 					<ul class="list-group t20">
 						{% for todo in todo_list %}
 							{% if todo.complete %}
-							<li class="list-group-item todo-completed">{{ todo.text }}</li>
+							<li class="list-group-item todo-completed" >{{ todo.text }}</li>
+							<br/>
+							<form action="{% url 'add_friend' todo.id %}" method="POST" role="form">
+								<input type="text" placeholder="enter whoever you want to add to this todo" name="friend"/> 
+								<button type="submit" class="button">Add your friend</button>
+							</form>
 							{% else %}
 							<a href="{% url 'complete' todo.id %}"><li class="list-group-item">{{ todo.text }}</li></a>
+							<br/>
+							<form action="{% url 'add_friend' todo.id %}" method="POST" role="form">
+								<input type="text" placeholder="enter whoever you want to add to this todo" name="friend"/> 
+								<button type="submit" class="button">Add your friend</button>
+							</form>
 							{% endif %}
 						{% endfor %}
 					</ul>

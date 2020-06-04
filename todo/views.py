@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
-from .models import Todo
+from .models import Todo, User
 from .forms import TodoForm
 
 def index(request):
@@ -39,3 +39,13 @@ def deleteAll(request):
     Todo.objects.all().delete()
 
     return redirect('index')
+
+
+
+
+def add_friend(request, todo_id): 
+    user = request.GET['friend']
+    todo = Todo.objects.get(pk=todo_id)
+    todo.users.add(user)
+   
+    return render(request, 'todo/index.html')
